@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import SearchTop from "./container/SearchTop";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "./container/Home";
+import MoviesContainer from "./container/MoviesContainer";
+import ResultsContainer from "./container/ResultsContainer";
+import TvShowsContainer from "./container/TvShowsContainer";
+import Tabs from "./container/Tabs";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      {/* <ScrollToTop /> */}
+      <div className="App">
+        <header className="App-header">
+          <h1>React Movies App</h1>
+        </header>
+        <SearchTop />
+        <Tabs />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/movies" exact component={MoviesContainer} />
+          <Route path="/results" component={ResultsContainer} />
+          <Route path="/tvshows" component={TvShowsContainer} />
+        </Switch> 
+      </div>
+    </Router>
   );
 }
 
