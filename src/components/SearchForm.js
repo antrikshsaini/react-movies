@@ -1,7 +1,9 @@
 import React from 'react'
-
+import InputLabel from "@material-ui/core/InputLabel";
 import { makeStyles } from '@material-ui/core'
-
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 
@@ -24,7 +26,7 @@ const getStyles = makeStyles(theme => ({
 const Form = props => {
   const classes = getStyles()
   return (
-    <form onSubmit={props.onSubmit} className={classes.form}>
+    <form onSubmit={props.onSubmit} className = "form-search">
       <TextField
         label='Search'
         name='search'
@@ -33,6 +35,21 @@ const Form = props => {
         margin='normal'
         variant='outlined'
       />
+      <FormControl variant="outlined" className="form-select">
+            <InputLabel id="demo-simple-select-outlined-label">
+              Search-Type
+            </InputLabel>
+            <Select
+              
+              onChange={e => props.onSelectChange(e.target.value)}
+              label="Search-Type"
+            >
+              <MenuItem value="movie">Movie</MenuItem>
+              <MenuItem value="multi">Multi</MenuItem>
+              <MenuItem value="tv">TV</MenuItem>
+              
+            </Select>
+          </FormControl>
       <Button variant='outlined' className={classes.button} type='submit'>
         Search
       </Button>

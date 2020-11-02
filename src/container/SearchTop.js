@@ -1,56 +1,82 @@
+import Tabs from './Tabs'
 import React, { Component } from 'react'
 import SearchForm from '../components/SearchForm'
-// import Form from '../components/Form'
-// import Loading from '../components/Loading'
-// import Recipes from '../components/Recipes'
-// import { getRecipes } from '../services/api'
+import { getResults } from '../service/api'
+import MoviesContainer from './MoviesContainer'
+import ResultsContainer from './ResultsContainer'
+
+
 
 class SearchTop extends Component {
   state = {
     searchName: '',
     // recipes: [],
-    isLoading: false
+    isLoaded: true,
+    searchType: '',
+    items: [],
   }
 
   fetchResults = e => {
-    const { searchName } = this.state
+    const { searchName, searchType } = this.state
     e.preventDefault()
-    alert("button clicked")
-    // this.setState({
-    //   isLoading: true
-    // })
-
-    // getRecipes(recipeName).then(
-    //   recipes => {
-    //     this.setState({
-    //       recipes,
-    //       isLoading: false
-    //     })
-    //   },
-    //   error => {
-    //     alert('Error', `Something went wrong! ${error}`)
-    //   }
-    // )
+    // alert("button clicked")
+    
+    getResults(searchType, searchName).then(
+      (res) => {
+        this.setState({
+          items: res,
+          isLoaded: false,
+        });
+      },
+      (error) => {
+        alert("Error", `Something went wrong! ${error}`);
+      }
+    );
+  
   }
 
   handleInputChange = searchName => {
     this.setState({
       searchName: searchName
     })
-    // console.log(searchName)
+    
+  }
+  handleSelectChange = searchType => {
+    this.setState({
+      searchType: searchType
+    })
+    
   }
 
   render() {
-    const { isLoading} = this.state
-    return (
-      <div>
-        <SearchForm
-          onInputChange={this.handleInputChange}
-          onSubmit={this.fetchResults}
-        />
-        {/* {isLoading ? <Loading /> : <Recipes recipes={recipes} />} */}
-      </div>
-    )
+    
+    const { items, isLoaded,searchName} = this.state
+    if(isLoaded == true){
+      return (
+        <div>
+          <SearchForm
+            onInputChange={this.handleInputChange}
+            onSubmit={this.fetchResults}
+            onSelectChange={this.handleSelectChange}
+          />
+          
+        </div>
+      )
+    }
+    else if(isLoaded == false){
+      return (
+        <div>
+          <SearchForm
+            onInputChange={this.handleInputChange}
+            onSubmit={this.fetchResults}
+            onSelectChange={this.handleSelectChange}
+          />
+          <Tabs />
+          <ResultsContainer results={items} />
+        </div>
+      )
+    }
+    
   }
 }
 

@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import MovieCard from "../components/MovieCard";
+import Cards from "../components/Cards";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getMovies } from "../service/api";
+import Loading from "../components/Loading"
 
 class MoviesContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: [],
-      isLoaded: false,
+      isLoaded: true,
       value: "now_playing",
     };
     this.handleChange = this.handleChange.bind(this);
@@ -55,7 +56,7 @@ class MoviesContainer extends Component {
     return (
       <main className="movies-main">
         <div>
-          <FormControl variant="outlined" className="movies-select">
+          <FormControl variant="outlined" className="form-select">
             <InputLabel id="demo-simple-select-outlined-label">
               Category
             </InputLabel>
@@ -70,21 +71,24 @@ class MoviesContainer extends Component {
               <MenuItem value="upcoming">Upcoming</MenuItem>
             </Select>
           </FormControl>
-          <div className="movies-cards">
+          {this.state.isLoaded ? <Loading /> 
+          :
+           <div className="movies-cards">
             {items.map((item) => (
-              <MovieCard
+              <Cards
                 key={item.id}
-                movie={{
+                info={{
                   title: `${item.title}`,
                   date: `${item.release_date}`,
                   popularity: `${item.popularity}`,
                   overview: `${item.overview}`,
                   imgUrl: `${item.poster_path}`,
-                  movieId: `${item.id}`,
+                  id: `${item.id}`,
                 }}
               />
             ))}
-          </div>
+          </div>}
+          
         </div>
       </main>
     );
