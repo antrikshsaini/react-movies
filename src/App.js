@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import SearchTop from "./container/SearchTop";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./container/Home";
 import MoviesContainer from "./container/MoviesContainer";
@@ -16,7 +14,6 @@ function App() {
         <header className="App-header">
           <h1>React Movies App</h1>
         </header>
-        <SearchTop />
         <Tabs />
         <Switch>
           <Route path="/" exact component={Home} />

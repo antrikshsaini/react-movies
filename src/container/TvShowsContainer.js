@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { getTVshows } from "../service/api";
 import Loading from "../components/Loading"
+import SearchForm from "../components/SearchForm"
 
 class MoviesContainer extends Component {
   constructor(props) {
@@ -14,8 +15,13 @@ class MoviesContainer extends Component {
       items: [],
       isLoaded: true,
       value: "airing_today",
+      searchName: '',
+      searchType: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+   
   }
   componentDidMount() {
     getTVshows(this.state.value).then(
@@ -50,11 +56,33 @@ class MoviesContainer extends Component {
     );
   };
 
+  handleInputChange = searchName => {
+    this.setState({
+      searchName: searchName
+    })
+    
+  }
+  handleSelectChange = searchType => {
+    this.setState({
+      searchType: searchType
+    })
+    
+  }
+  fetchResults = () => {
+    
+    alert("select Results tab first")
+
+  }
   render() {
     const { items } = this.state;
 
     return (
       <main className="tv-main">
+        <SearchForm
+            onInputChange={this.handleInputChange}
+            onSubmit={this.fetchResults}
+            onSelectChange={this.handleSelectChange}
+          />
         <div>
           <FormControl variant="outlined" className="form-select">
             <InputLabel id="demo-simple-select-outlined-label">
