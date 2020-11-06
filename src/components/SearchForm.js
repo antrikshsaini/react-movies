@@ -20,6 +20,10 @@ const getStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
+  },
+  select:{
+    minWidth: 200,
+    
   }
 }))
 
@@ -40,10 +44,12 @@ const Form = props => {
               Search-Type
             </InputLabel>
             <Select
-              
+              className={classes.select}
               onChange={e => props.onSelectChange(e.target.value)}
-              label="Search-Type"
+              labelId="demo-simple-select-outlined-label"
+              
             >
+
               <MenuItem value="movie">Movie</MenuItem>
               <MenuItem value="multi">Multi</MenuItem>
               <MenuItem value="tv">TV</MenuItem>

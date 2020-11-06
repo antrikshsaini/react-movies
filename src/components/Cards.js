@@ -14,12 +14,14 @@ class Cards extends Component {
           alt="React movies project"
         />
 
-        <h3 className="card-name">{this.props.info.title}</h3>
-
-        <p className="card-date-popularity">
-          Release Date : {this.props.info.date} | Popularity : {this.props.info.popularity}
-        </p>
-        <p className="card-overview">{this.props.info.overview}</p>
+        <div className="card-desc">
+          <h3 className="card-name">{this.props.info.title}</h3>
+  
+          <p className="card-date-popularity">
+            Release Date : {this.props.info.date} | Popularity : {this.props.info.popularity}
+          </p>
+          <p className="card-overview">{this.props.info.overview}</p>
+        </div>
       </div>
       
     );

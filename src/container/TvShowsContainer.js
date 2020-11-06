@@ -83,7 +83,7 @@ class MoviesContainer extends Component {
             onSubmit={this.fetchResults}
             onSelectChange={this.handleSelectChange}
           />
-        <div>
+        <div className="site-body">
           <FormControl variant="outlined" className="form-select">
             <InputLabel id="demo-simple-select-outlined-label">
               Category

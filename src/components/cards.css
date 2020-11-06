@@ -2,3 +2,18 @@
     max-width: 20%;
     height: 50vh;
 } */
+
+.card-main{
+    display: flex;
+    max-width: 80%;
+    margin: 30px auto;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.card-desc {
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    margin: auto 20px;
+}
